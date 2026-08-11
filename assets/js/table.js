@@ -1,6 +1,25 @@
 let invoiceToDelete = null;
 
 
+function uhrzeitAnzeigen() {
+    const now = new Date();
+
+    const date_time = now.toLocaleTimeString("de-DE", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+
+    document.getElementById("date_time").textContent = date_time;
+}
+
+uhrzeitAnzeigen();
+setInterval(uhrzeitAnzeigen, 1000);
+
+function filterFunction(x) {
+    document.getElementById("filters").classList.toggle("show");
+}
+
 const supabaseUrl = "https://mcdelwjwyrahrufjgnvu.supabase.co";
 const supabaseKey = "sb_publishable_HBhsRhWExorIvdq4DHbO1Q_T1FOXofw";
 
@@ -96,7 +115,6 @@ async function getInvoices() {
         invoicesContainer.appendChild(invoiceElement);
     });
 }
-
 
 async function deleteInvoice(invoiceId) {
 

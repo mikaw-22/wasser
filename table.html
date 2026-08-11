@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/png" href="assets/img/palm.png">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Alles für Malle</title>
 </head>
 <body>
@@ -38,8 +39,54 @@
     </div>
 
     <main>
-        <h2>Aufschlüsselung:</h2>
+
+        <div class="header-row">
+
+            <h2>Aufschlüsselung:</h2>
+
+            <div class="filter-area">
+
+                <div class="filters" id="filters">
+
+                    <select id="filterPlayer">
+                        <option value="">Alle Spieler</option>
+                    </select>
+
+                    <select id="filterPaid">
+                        <option value="">Bezahlt / Unbezahlt</option>
+                        <option value="true">Bezahlt</option>
+                        <option value="false">Nicht bezahlt</option>
+                    </select>
+
+                    <select id="filterGameday">
+                        <option value="">Spieltag / Kein Spieltag</option>
+                        <option value="true">Spieltag</option>
+                        <option value="false">Kein Spieltag</option>
+                    </select>
+
+                    <label>
+                        <span style="font-size: 12.5px;">Von:</span>
+                        <input type="date" id="filterDateFrom">
+                    </label>
+
+                    <label>
+                        <span style="font-size: 12.5px;">Bis:</span>
+                        <input type="date" id="filterDateTo">
+                    </label>
+
+                </div>
+
+                <i
+                    class="fa-solid fa-filter"
+                    onclick="filterFunction(this)"
+                ></i>
+
+            </div>
+
+        </div>
+
         <div id="invoices"></div>
+
     </main>
 
     <div class="popup" id="deletePopup">

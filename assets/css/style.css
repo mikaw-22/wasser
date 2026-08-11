@@ -215,6 +215,59 @@ a {
     cursor: pointer;
 }
 
+.fa-solid {
+    font-size: 20px;
+}
+
+.below_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.below_nav i {
+    cursor: pointer;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-row h2 {
+    margin: 0;
+}
+
+.filter-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filters {
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+
+.filters.show {
+    display: flex;
+}
+
+.filter-area i {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+select, label input {
+    outline: none;
+    padding: 5px;
+}
+
 @media (min-width: 1024px) { /* Desktop */
     #players {
         display: flex;
@@ -237,6 +290,25 @@ a {
     .material-symbols-outlined {
         zoom: 70%;
         color: rgba(255, 0, 0, 0.432);
+        margin-bottom: 70px;
+        margin-left: 110px;
+    }
+
+    .invoice { 
+        position: relative; 
+        width: 220px; 
+        height: 115px; 
+        padding: 15px; 
+        box-sizing: border-box; 
+        border-radius: 5px; 
+        background-color: #f5f5f5; 
+        border: 1px solid #00000033; 
+    }
+
+    #invoices { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 15px; 
     }
 }
 
