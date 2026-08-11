@@ -1,0 +1,77 @@
+body {
+    padding: 10px;
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu {
+    margin-left: 10px;
+}
+
+.bar1, .bar2, .bar3 {
+    background-color: black;
+    height: 3px;
+    width: 30px;
+    margin-bottom: 6px;
+}
+
+main {
+    margin-top: 20px;
+}
+
+.saeulen_tracker {
+    margin-right: 10px;
+}
+
+button {
+    outline: none;
+    font-size: 20px;
+    background-color: rgb(216, 255, 218);
+    border: 1px solid #00000011;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+@media (min-width: 1024px) {
+    #players {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        width: 75px;
+        height: 75px;
+        margin: 0 20px 20px 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    #players {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+
+    button {
+        width: 50px;
+        height: 50px;
+    }
+}
