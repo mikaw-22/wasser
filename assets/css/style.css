@@ -4,6 +4,11 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
+button, i, label, a {
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+}
+
 .nav_container {
     position: relative;
 }
@@ -34,7 +39,7 @@ main {
     margin-right: 10px;
 }
 
-main div button {
+#players button {
     outline: none;
     font-size: 20px;
     background-color: rgb(227, 249, 255);
@@ -165,11 +170,17 @@ a {
     right: 7px;
     border: none;
     background: none;
-    font-size: 20px;
-    line-height: 1;
-    cursor: default;
     padding: 0;
+    color: rgba(255, 0, 0, 0.432);
+}
 
+.photo-invoice {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    border: none;
+    background: none;
+    padding: 0;
 }
 
 .popup {
@@ -212,14 +223,9 @@ a {
     padding: 8px 15px;
     border-radius: 5px;
     border: 1px solid #00000022;
-    cursor: pointer;
 }
 
 .fa-filter {
-    font-size: 20px;
-}
-
-.fa-camera {
     font-size: 20px;
 }
 
@@ -229,10 +235,6 @@ a {
     align-items: center;
     gap: 15px;
     position: relative;
-}
-
-.below_nav i {
-    cursor: pointer;
 }
 
 .header-row {
@@ -259,7 +261,6 @@ a {
 }
 
 .filter-area i {
-    cursor: pointer;
     font-size: 18px;
 }
 
@@ -270,16 +271,11 @@ select, label input {
 
 .player-popup {
     display: none;
-
     position: fixed;
-
     inset: 0;
-
     justify-content: center;
     align-items: center;
-
     background-color: #00000033;
-
     z-index: 100;
 }
 
@@ -289,20 +285,13 @@ select, label input {
 
 .player-popup-content {
     position: relative;
-
     width: 620px;
     max-width: calc(100% - 40px);
-
     padding: 25px;
-
     box-sizing: border-box;
-
     background-color: white;
-
     border-radius: 8px;
-
     border: 1px solid #00000022;
-
     box-shadow: 0 5px 20px #00000022;
 }
 
@@ -324,8 +313,6 @@ select, label input {
 
 .popup-cancel .material-symbols-outlined {
     font-size: 25px;
-    margin-top: 30px;
-    margin-right: 40px;
 }
 
 .player-popup-content h2 {
@@ -334,20 +321,15 @@ select, label input {
 
 .popup-checkbox {
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     margin-bottom: 20px;
-
     cursor: pointer;
 }
 
 .popup-checkbox input {
     width: 18px;
     height: 18px;
-
     cursor: pointer;
 }
 
@@ -357,18 +339,12 @@ select, label input {
 
 .photo-upload label {
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     gap: 8px;
-
     padding: 10px;
-
     border: 1px solid #00000022;
-
     border-radius: 5px;
-
     cursor: pointer;
 }
 
@@ -378,17 +354,11 @@ select, label input {
 
 .popup-submit {
     width: 100%;
-
     padding: 10px;
-
     border: 1px solid #00000022;
-
     border-radius: 5px;
-
     background-color: rgb(227, 249, 255);
-
     cursor: pointer;
-
     font-size: 16px;
 }
 
@@ -397,7 +367,6 @@ select, label input {
     justify-content: center;
     align-items: center;
     gap: 8px;
-
     cursor: pointer;
 }
 
@@ -418,6 +387,127 @@ select, label input {
     word-break: break-all;
 }
 
+.photo-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000066;
+    z-index: 100;
+}
+
+.photo-popup.show {
+    display: flex;
+}
+
+.photo-popup-content {
+    position: relative;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 90%;
+    max-height: 90%;
+}
+
+.photo-popup-content img {
+    display: block;
+    max-width: 80vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.close-photo-popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 50px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 0%;
+    background-color: white;
+    z-index: 2;
+}
+
+.delete-invoice {
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+    color: rgba(255, 0, 0, 0.432);
+}
+
+.delete-invoice .material-symbols-outlined {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: rgba(255, 0, 0, 0.432);
+}
+
+.photo-invoice {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.photo-invoice .fa-camera {
+    font-size: 16px;
+}
+
+.nophoto-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000033;
+    z-index: 100;
+}
+
+.nophoto-popup.show {
+    display: flex;
+}
+
+.false-password-popup {
+    display: none;
+    position: fixed;
+    inset: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #00000033;
+    z-index: 100;
+}
+
+.false-password-popup.show {
+    display: flex;
+}
+
+#closeFalsePasswordPopup {
+    background-color: rgba(255, 0, 0, 0.11);
+    color: #000;
+}
+
 @media (min-width: 1024px) { /* Desktop */
     #players {
         display: flex;
@@ -426,7 +516,7 @@ select, label input {
         align-items: center;
     }
 
-    main div button {
+    #players button {
         width: 75px;
         height: 75px;
         margin: 0 20px 20px 0;
@@ -435,13 +525,6 @@ select, label input {
 
     #invoices {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .material-symbols-outlined {
-        zoom: 70%;
-        color: rgba(255, 0, 0, 0.432);
-        margin-bottom: 70px;
-        margin-left: 110px;
     }
 
     .invoice { 
@@ -464,6 +547,11 @@ select, label input {
     .filters.show {
         display: flex;
     }
+
+    .popup-cancel .material-symbols-outlined {
+        font-size: 25px;
+        color: rgba(255, 0, 0, 0.432);
+    }
 }
 
 @media (max-width: 1024px) {  /* Mobil */
@@ -475,17 +563,10 @@ select, label input {
         gap: 15px;
     }
 
-    main div button {
+    #players button {
         width: 50px;
         height: 50px;
         -webkit-tap-highlight-color: transparent;
-    }
-
-    .material-symbols-outlined {
-        zoom: 70%;
-        color: rgba(255, 0, 0, 0.432);
-        margin-left: 50px;
-        margin-bottom: 40px;
     }
 
     .filters.show {
@@ -493,11 +574,3 @@ select, label input {
         flex-direction: column;
     }
 }
-
-
-
-
-
-
-
-

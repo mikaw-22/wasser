@@ -19,7 +19,6 @@ function uhrzeitAnzeigen() {
 uhrzeitAnzeigen();
 setInterval(uhrzeitAnzeigen, 1000);
 
-
 // =========================
 // SUPABASE
 // =========================
@@ -440,16 +439,27 @@ async function login() {
 
     if (data) {
 
-        window.location.href =
-            "players.html";
+        window.location.href = "players.html";
 
     } else {
 
-        alert("Falsches Passwort.");
+        document
+            .getElementById("falsePasswordPopup")
+            .classList.add("show");
 
     }
 
 }
+
+document
+    .getElementById("closeFalsePasswordPopup")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("falsePasswordPopup")
+            .classList.remove("show");
+
+    });
 
 
 // =========================

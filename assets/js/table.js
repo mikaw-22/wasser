@@ -118,41 +118,29 @@ function renderInvoices(invoices) {
     const invoicesContainer =
         document.getElementById("invoices");
 
-
     if (!invoicesContainer) {
         return;
     }
 
-
     invoicesContainer.innerHTML = "";
-
 
     invoices.forEach(invoice => {
 
         const invoiceElement =
             document.createElement("div");
 
-
-        invoiceElement.classList.add(
-            "invoice"
-        );
-
+        invoiceElement.classList.add("invoice");
 
         const date =
             new Date(invoice.time);
 
-
         invoiceElement.innerHTML = `
 
-            <button
-                class="delete-invoice"
-                title="Eintrag löschen"
-            >
+            <button class="delete-invoice" title="Eintrag löschen">
                 <span class="material-symbols-outlined">
                     delete
                 </span>
             </button>
-
 
             <div class="invoice-header">
 
@@ -162,11 +150,10 @@ function renderInvoices(invoices) {
 
                 <span>
                     ${invoice.vorname}
-                    ${invoice.name}
+                    <!--${invoice.name}-->
                 </span>
 
             </div>
-
 
             <div class="invoice-time">
 
@@ -178,7 +165,6 @@ function renderInvoices(invoices) {
                 })}
 
             </div>
-
 
             <div class="invoice-status">
 
@@ -193,18 +179,21 @@ function renderInvoices(invoices) {
                 </span>
 
             </div>
+
+            <button class="photo-invoice" title="Foto ansehen">
+                <i class="fa-solid fa-camera" style="color: #008cff"></i>
+            </button>
         `;
 
 
-        // =====================
-        // LÖSCHEN BUTTON
-        // =====================
+        // =========================
+        // LÖSCHEN
+        // =========================
 
         const deleteButton =
             invoiceElement.querySelector(
                 ".delete-invoice"
             );
-
 
         deleteButton.addEventListener(
             "click",
@@ -213,14 +202,65 @@ function renderInvoices(invoices) {
                 invoiceToDelete =
                     invoice.id;
 
-
                 document
                     .getElementById("deletePopup")
                     .classList.add("show");
-
             }
         );
 
+
+        // =========================
+        // FOTO ANSEHEN
+        // =========================
+
+        const photoButton =
+            invoiceElement.querySelector(
+                ".photo-invoice"
+            );
+
+        photoButton.addEventListener(
+            "click",
+            () => {
+
+                // Kein Foto vorhanden
+                if (!invoice.photo) {
+
+                    document
+                        .getElementById("nophotoPopup")
+                        .classList.add("show");
+
+                    return;
+                }
+
+
+                // Öffentliche URL des Fotos holen
+                const { data } =
+                    supabaseClient
+                        .storage
+                        .from("invoice-photos")
+                        .getPublicUrl(
+                            invoice.photo
+                        );
+
+
+                // Bild setzen
+                document
+                    .getElementById("invoicePhoto")
+                    .src =
+                    data.publicUrl;
+
+
+                // Popup öffnen
+                document
+                    .getElementById("photoPopup")
+                    .classList.add("show");
+            }
+        );
+
+
+        // =========================
+        // INVOICE HINZUFÜGEN
+        // =========================
 
         invoicesContainer.appendChild(
             invoiceElement
@@ -229,7 +269,10 @@ function renderInvoices(invoices) {
     });
 
 
-    // Falls keine Ergebnisse
+    // =========================
+    // KEINE ERGEBNISSE
+    // =========================
+
     if (invoices.length === 0) {
 
         invoicesContainer.innerHTML = `
@@ -237,11 +280,29 @@ function renderInvoices(invoices) {
                 Keine Einträge gefunden.
             </p>
         `;
-
     }
-
 }
 
+document
+    .getElementById("closePhotoPopup")
+    .addEventListener("click", () => {
+
+        document
+            .getElementById("photoPopup")
+            .classList.remove("show");
+
+        document
+            .getElementById("invoicePhoto")
+            .src = "";
+    });
+
+document
+    .getElementById("closeNophotoPopup")
+    .addEventListener("click", () => {
+        document
+            .getElementById("nophotoPopup")
+            .classList.remove("show");
+    });
 
 // =========================
 // FILTER

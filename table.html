@@ -76,10 +76,7 @@
 
                 </div>
 
-                <i
-                    class="fa-solid fa-filter"
-                    onclick="filterFunction(this)"
-                ></i>
+                <i class="fa-solid fa-filter" onclick="filterFunction(this)"></i>
 
             </div>
 
@@ -103,6 +100,37 @@
 
         </div>
     </div>
+
+    <div class="nophoto-popup" id="nophotoPopup">
+        <div class="popup-content">
+
+            <div class="popup-question">
+                <span>Für diesen Eintrag wurde kein Foto hochgeladen.</span>
+            </div>
+
+            <div class="popup-buttons">
+                <button id="closeNophotoPopup" style="background-color: rgba(255, 0, 0, 0.11); color:#000">
+                    Okay
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="photo-popup" id="photoPopup">
+
+        <div class="photo-popup-content">
+
+            <button class="close-photo-popup" id="closePhotoPopup">
+                <i class="fa-solid fa-close"></i>
+            </button>
+
+            <img id="invoicePhoto" src="" alt="Invoice Foto">
+
+        </div>
+
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="assets/js/table.js"></script>
