@@ -1,7 +1,13 @@
 let invoiceToDelete = null;
+let allInvoices = [];
 
+
+// =========================
+// UHRZEIT
+// =========================
 
 function uhrzeitAnzeigen() {
+
     const now = new Date();
 
     const date_time = now.toLocaleTimeString("de-DE", {
@@ -10,24 +16,49 @@ function uhrzeitAnzeigen() {
         second: "2-digit"
     });
 
-    document.getElementById("date_time").textContent = date_time;
+    const element = document.getElementById("date_time");
+
+    if (element) {
+        element.textContent = date_time;
+    }
 }
 
 uhrzeitAnzeigen();
 setInterval(uhrzeitAnzeigen, 1000);
 
-function filterFunction(x) {
-    document.getElementById("filters").classList.toggle("show");
+
+// =========================
+// FILTER-MENÜ
+// =========================
+
+function filterFunction() {
+
+    document
+        .getElementById("filters")
+        .classList.toggle("show");
 }
 
-const supabaseUrl = "https://mcdelwjwyrahrufjgnvu.supabase.co";
-const supabaseKey = "sb_publishable_HBhsRhWExorIvdq4DHbO1Q_T1FOXofw";
 
-const supabaseClient = window.supabase.createClient(
-    supabaseUrl,
-    supabaseKey
-);
+// =========================
+// SUPABASE
+// =========================
 
+const supabaseUrl =
+    "https://mcdelwjwyrahrufjgnvu.supabase.co";
+
+const supabaseKey =
+    "sb_publishable_HBhsRhWExorIvdq4DHbO1Q_T1FOXofw";
+
+const supabaseClient =
+    window.supabase.createClient(
+        supabaseUrl,
+        supabaseKey
+    );
+
+
+// =========================
+// HAUPTMENÜ
+// =========================
 
 function menuFunction(x) {
 
@@ -39,132 +70,562 @@ function menuFunction(x) {
 }
 
 
+// =========================
+// INVOICES AUS DB LADEN
+// =========================
+
 async function getInvoices() {
 
-    const { data, error } = await supabaseClient
-        .from("invoices")
-        .select("*")
-        .order("time", { ascending: false });
+    const { data, error } =
+        await supabaseClient
+            .from("invoices")
+            .select("*")
+            .order("time", {
+                ascending: false
+            });
+
 
     if (error) {
-        console.error("Fehler beim Laden der Invoices:", error);
+
+        console.error(
+            "Fehler beim Laden der Invoices:",
+            error
+        );
+
         return;
     }
 
-    const invoicesContainer = document.getElementById("invoices");
+
+    // Alle Invoices speichern
+    allInvoices = data;
+
+
+    // Spielerfilter erstellen
+    loadPlayerFilter();
+
+
+    // Alle anzeigen
+    renderInvoices(allInvoices);
+}
+
+
+// =========================
+// INVOICES ANZEIGEN
+// =========================
+
+function renderInvoices(invoices) {
+
+    const invoicesContainer =
+        document.getElementById("invoices");
+
 
     if (!invoicesContainer) {
         return;
     }
 
+
     invoicesContainer.innerHTML = "";
 
-    data.forEach(invoice => {
 
-        const invoiceElement = document.createElement("div");
+    invoices.forEach(invoice => {
 
-        invoiceElement.classList.add("invoice");
+        const invoiceElement =
+            document.createElement("div");
 
-        const date = new Date(invoice.time);
+
+        invoiceElement.classList.add(
+            "invoice"
+        );
+
+
+        const date =
+            new Date(invoice.time);
 
 
         invoiceElement.innerHTML = `
-            <button class="delete-invoice" title="Eintrag löschen">
-                <span class="material-symbols-outlined">delete</span>
+
+            <button
+                class="delete-invoice"
+                title="Eintrag löschen"
+            >
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
             </button>
 
+
             <div class="invoice-header">
-                <strong>${invoice.number}</strong>
-                <span>${invoice.vorname} ${invoice.name}</span>
+
+                <strong>
+                    ${invoice.number}
+                </strong>
+
+                <span>
+                    ${invoice.vorname}
+                    ${invoice.name}
+                </span>
+
             </div>
 
+
             <div class="invoice-time">
-                ${date.toLocaleDateString("de-DE")} ·
+
+                ${date.toLocaleDateString("de-DE")}
+                ·
                 ${date.toLocaleTimeString("de-DE", {
                     hour: "2-digit",
                     minute: "2-digit"
                 })}
+
             </div>
 
+
             <div class="invoice-status">
+
                 <span>
-                    Bezahlt: ${invoice.paid ? "✓" : "✕"}
+                    Bezahlt:
+                    ${invoice.paid ? "✓" : "✕"}
                 </span>
 
                 <span>
-                    Spieltag: ${invoice.gameday ? "✓" : "✕"}
+                    Spieltag:
+                    ${invoice.gameday ? "✓" : "✕"}
                 </span>
+
             </div>
         `;
 
 
+        // =====================
+        // LÖSCHEN BUTTON
+        // =====================
+
         const deleteButton =
-            invoiceElement.querySelector(".delete-invoice");
+            invoiceElement.querySelector(
+                ".delete-invoice"
+            );
 
 
-        deleteButton.addEventListener("click", () => {
+        deleteButton.addEventListener(
+            "click",
+            () => {
 
-            invoiceToDelete = invoice.id;
+                invoiceToDelete =
+                    invoice.id;
 
-            document
-                .getElementById("deletePopup")
-                .classList.add("show");
+
+                document
+                    .getElementById("deletePopup")
+                    .classList.add("show");
+
+            }
+        );
+
+
+        invoicesContainer.appendChild(
+            invoiceElement
+        );
+
+    });
+
+
+    // Falls keine Ergebnisse
+    if (invoices.length === 0) {
+
+        invoicesContainer.innerHTML = `
+            <p class="no-invoices">
+                Keine Einträge gefunden.
+            </p>
+        `;
+
+    }
+
+}
+
+
+// =========================
+// FILTER
+// =========================
+
+function applyFilters() {
+
+    const player =
+        document
+            .getElementById("filterPlayer")
+            .value;
+
+
+    const paid =
+        document
+            .getElementById("filterPaid")
+            .value;
+
+
+    const gameday =
+        document
+            .getElementById("filterGameday")
+            .value;
+
+
+    const dateFrom =
+        document
+            .getElementById("filterDateFrom")
+            .value;
+
+
+    const dateTo =
+        document
+            .getElementById("filterDateTo")
+            .value;
+
+
+    const filteredInvoices =
+        allInvoices.filter(invoice => {
+
+
+            // =====================
+            // SPIELER
+            // =====================
+
+            if (
+                player !== "" &&
+                invoice.number.toString() !== player
+            ) {
+
+                return false;
+
+            }
+
+
+            // =====================
+            // BEZAHLT
+            // =====================
+
+            if (
+                paid !== "" &&
+                invoice.paid.toString() !== paid
+            ) {
+
+                return false;
+
+            }
+
+
+            // =====================
+            // SPIELTAG
+            // =====================
+
+            if (
+                gameday !== "" &&
+                invoice.gameday.toString() !== gameday
+            ) {
+
+                return false;
+
+            }
+
+
+            // =====================
+            // DATUM VON
+            // =====================
+
+            if (dateFrom !== "") {
+
+                const invoiceDate =
+                    new Date(invoice.time);
+
+
+                const from =
+                    new Date(dateFrom);
+
+
+                from.setHours(
+                    0,
+                    0,
+                    0,
+                    0
+                );
+
+
+                if (invoiceDate < from) {
+
+                    return false;
+
+                }
+
+            }
+
+
+            // =====================
+            // DATUM BIS
+            // =====================
+
+            if (dateTo !== "") {
+
+                const invoiceDate =
+                    new Date(invoice.time);
+
+
+                const to =
+                    new Date(dateTo);
+
+
+                to.setHours(
+                    23,
+                    59,
+                    59,
+                    999
+                );
+
+
+                if (invoiceDate > to) {
+
+                    return false;
+
+                }
+
+            }
+
+
+            return true;
+
         });
 
 
-        invoicesContainer.appendChild(invoiceElement);
-    });
+    renderInvoices(
+        filteredInvoices
+    );
+
 }
 
-async function deleteInvoice(invoiceId) {
 
-    const { error } = await supabaseClient
-        .from("invoices")
-        .delete()
-        .eq("id", invoiceId);
+// =========================
+// FILTER-EVENTS
+// =========================
 
-    if (error) {
-        console.error("Fehler beim Löschen:", error);
+document
+    .getElementById("filterPlayer")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+document
+    .getElementById("filterPaid")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+document
+    .getElementById("filterGameday")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+document
+    .getElementById("filterDateFrom")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+document
+    .getElementById("filterDateTo")
+    .addEventListener(
+        "change",
+        applyFilters
+    );
+
+
+// =========================
+// SPIELER-FILTER
+// =========================
+
+function loadPlayerFilter() {
+
+    const select =
+        document.getElementById(
+            "filterPlayer"
+        );
+
+
+    if (!select) {
         return;
     }
 
-    console.log("Invoice gelöscht:", invoiceId);
 
-    await getInvoices();
+    // Alte Optionen entfernen
+    select.innerHTML = `
+        <option value="">
+            Alle Spieler
+        </option>
+    `;
+
+
+    const players = [];
+
+
+    allInvoices.forEach(invoice => {
+
+        const exists =
+            players.find(
+                player =>
+                    player.number === invoice.number
+            );
+
+
+        if (!exists) {
+
+            players.push({
+
+                number:
+                    invoice.number,
+
+                name:
+                    invoice.vorname +
+                    " " +
+                    invoice.name
+
+            });
+
+        }
+
+    });
+
+
+    players.sort(
+        (a, b) =>
+            Number(a.number) -
+            Number(b.number)
+    );
+
+
+    players.forEach(player => {
+
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            player.number;
+
+
+        option.textContent =
+            `${player.number} – ${player.name}`;
+
+
+        select.appendChild(
+            option
+        );
+
+    });
+
 }
 
 
-// Nein
+// =========================
+// INVOICE LÖSCHEN
+// =========================
+
+async function deleteInvoice(invoiceId) {
+
+    const { error } =
+        await supabaseClient
+            .from("invoices")
+            .delete()
+            .eq("id", invoiceId);
+
+
+    if (error) {
+
+        console.error(
+            "Fehler beim Löschen:",
+            error
+        );
+
+        return;
+
+    }
+
+
+    console.log(
+        "Invoice gelöscht:",
+        invoiceId
+    );
+
+
+    await getInvoices();
+
+}
+
+
+// =========================
+// POPUP → NEIN
+// =========================
+
 document
     .getElementById("cancelDelete")
-    .addEventListener("click", () => {
+    .addEventListener(
+        "click",
+        () => {
 
-        invoiceToDelete = null;
-
-        document
-            .getElementById("deletePopup")
-            .classList.remove("show");
-    });
+            invoiceToDelete = null;
 
 
-// Ja
+            document
+                .getElementById("deletePopup")
+                .classList.remove("show");
+
+        }
+    );
+
+
+// =========================
+// POPUP → JA
+// =========================
+
 document
     .getElementById("confirmDelete")
-    .addEventListener("click", async () => {
+    .addEventListener(
+        "click",
+        async () => {
 
-        if (invoiceToDelete === null) {
-            return;
+            if (
+                invoiceToDelete === null
+            ) {
+
+                return;
+
+            }
+
+
+            await deleteInvoice(
+                invoiceToDelete
+            );
+
+
+            invoiceToDelete = null;
+
+
+            document
+                .getElementById("deletePopup")
+                .classList.remove("show");
+
         }
+    );
 
-        await deleteInvoice(invoiceToDelete);
 
-        invoiceToDelete = null;
-
-        document
-            .getElementById("deletePopup")
-            .classList.remove("show");
-    });
-
+// =========================
+// START
+// =========================
 
 getInvoices();
 

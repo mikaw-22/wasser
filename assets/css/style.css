@@ -254,10 +254,6 @@ a {
     gap: 10px;
 }
 
-.filters.show {
-    display: flex;
-}
-
 .filter-area i {
     cursor: pointer;
     font-size: 18px;
@@ -310,6 +306,10 @@ select, label input {
         flex-wrap: wrap; 
         gap: 15px; 
     }
+
+    .filters.show {
+        display: flex;
+    }
 }
 
 @media (max-width: 1024px) {  /* Mobil */
@@ -332,6 +332,11 @@ select, label input {
         color: rgba(255, 0, 0, 0.432);
         margin-left: 50px;
         margin-bottom: 40px;
+    }
+
+    .filters.show {
+        display: flex;
+        flex-direction: column;
     }
 }
 
