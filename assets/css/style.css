@@ -1,5 +1,5 @@
 body {
-    padding: 10px;
+    padding: 20px 10px 10px 10px;
     margin: 0;
     font-family: "Roboto", sans-serif;
 }
@@ -30,13 +30,61 @@ main {
     margin-right: 10px;
 }
 
-button {
+main div button {
     outline: none;
     font-size: 20px;
-    background-color: rgb(216, 255, 218);
+    background-color: rgb(227, 249, 255);
     border: 1px solid #00000011;
     border-radius: 5px;
     cursor: pointer;
+}
+
+input {
+    outline: none;
+}
+
+.password {
+    font-size: 13px;
+}
+
+p {
+    margin: 0;
+}
+
+.login_cont {
+    display: flex;
+    justify-content: center;
+}
+
+.login_nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    transition: 0.4s;
+}
+
+.change .bar1 {
+    transform: translate(0, 9px) rotate(-45deg);
+}
+
+.change .bar2 {
+    opacity: 0;
+}
+
+.change .bar3 {
+    transform: translate(0, -9px) rotate(45deg);
 }
 
 
@@ -45,8 +93,7 @@ button {
 
 
 
-
-@media (min-width: 1024px) {
+@media (min-width: 1024px) { /* Desktop */
     #players {
         display: flex;
         flex-wrap: wrap;
@@ -54,14 +101,14 @@ button {
         align-items: center;
     }
 
-    button {
+    main div button {
         width: 75px;
         height: 75px;
         margin: 0 20px 20px 0;
     }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px) {  /* Mobil */
     #players {
         display: flex;
         flex-wrap: wrap;
@@ -70,8 +117,16 @@ button {
         gap: 15px;
     }
 
-    button {
+    main div button {
         width: 50px;
         height: 50px;
     }
 }
+
+
+
+
+
+
+
+
