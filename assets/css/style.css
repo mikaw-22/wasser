@@ -6,7 +6,6 @@ body {
 
 button, i, label, a {
     -webkit-tap-highlight-color: transparent;
-    tap-highlight-color: transparent;
 }
 
 .nav_container {

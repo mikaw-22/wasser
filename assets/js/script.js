@@ -406,62 +406,6 @@ if (cancelPlayerPopup) {
 
 }
 
-
-// =========================
-// LOGIN
-// =========================
-
-async function login() {
-
-    const password =
-        document
-            .getElementById("zugang")
-            .value;
-
-
-    const { data, error } =
-        await supabaseClient
-            .from("passwords")
-            .select("id")
-            .eq("password", password)
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(error);
-
-        alert("Fehler beim Login.");
-
-        return;
-    }
-
-
-    if (data) {
-
-        window.location.href = "players.html";
-
-    } else {
-
-        document
-            .getElementById("falsePasswordPopup")
-            .classList.add("show");
-
-    }
-
-}
-
-document
-    .getElementById("closeFalsePasswordPopup")
-    .addEventListener("click", () => {
-
-        document
-            .getElementById("falsePasswordPopup")
-            .classList.remove("show");
-
-    });
-
-
 // =========================
 // MENÜ
 // =========================
@@ -476,7 +420,6 @@ function menuFunction(x) {
         .classList.toggle("show");
 
 }
-
 
 // =========================
 // START
