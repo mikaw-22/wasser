@@ -101,6 +101,7 @@ getPlayers();
 
 
 
+
 async function login() {
     const password = document.getElementById("zugang").value;
 
@@ -132,3 +133,10 @@ function menuFunction(x) {
     x.classList.toggle("change");
     document.getElementById("navLinks").classList.toggle("show");
 }
+
+
+
+
+
+
+getPlayers();

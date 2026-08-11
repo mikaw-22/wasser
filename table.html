@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/png" href="assets/img/palm.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=delete" />
     <title>Alles für Malle</title>
 </head>
 <body>
@@ -30,18 +31,33 @@
         </nav>
 
         <nav class="menuLinks" id="navLinks">
-            <p class="menuP"><a href="table.html">Tabelle</a></p>
+            <p class="menuP" style="font-weight: bold;"><a href="players.html">Home</a></p>
             <p class="menuP">Säulen</p>
             <p class="menuP"><a href="index.html">Logout</a></p>
         </nav>
     </div>
 
     <main>
-        <h2>Vergessene Flasche:</h2>
-            <div id="players"></div>
+        <h2>Aufschlüsselung:</h2>
+        <div id="invoices"></div>
     </main>
 
+    <div class="popup" id="deletePopup">
+        <div class="popup-content">
+
+            <div class="popup-question">
+                <span>Eintrag wirklich löschen?</span>
+            </div>
+
+            <div class="popup-buttons">
+                <button id="cancelDelete" style="background-color: rgba(255, 0, 0, 0.11);">Nein</button>
+                <button id="confirmDelete" style="background-color: rgba(0, 128, 0, 0.11);">Ja</button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/table.js"></script>
 </body>
 </html>
