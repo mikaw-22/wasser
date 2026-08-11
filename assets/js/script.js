@@ -74,7 +74,6 @@ async function createInvoice(player) {
     const { data, error } = await supabaseClient
         .from("invoices")
         .insert({
-            id: player.id,
             name: player.name,
             vorname: player.vorname,
             number: player.nummer,
@@ -131,5 +130,5 @@ async function login() {
 
 function menuFunction(x) {
     x.classList.toggle("change");
-    // document.getElementById("navLinks").classList.toggle("show");
+    document.getElementById("navLinks").classList.toggle("show");
 }

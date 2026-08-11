@@ -12,22 +12,29 @@
 </head>
 <body>
     
-    <nav>
-        <div class="menu" onclick="menuFunction(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
-        <div class="date_time">
-            <p id="date_time"></p>
-        </div>
-        <div class="saeulen_tracker">
-            <p id="tracker">1.5 Säulen</p>
-        </div>
-    </nav>
-    <nav class="menuLinks">
+    <div class="nav_container">
+        <nav>
+            <div class="menu" onclick="menuFunction(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
 
-    </nav>
+            <div class="date_time">
+                <p id="date_time"></p>
+            </div>
+
+            <div class="saeulen_tracker">
+                <p id="tracker">1.5 Säulen</p>
+            </div>
+        </nav>
+
+        <nav class="menuLinks" id="navLinks">
+            <p>Tabelle</p>
+            <p>Säulen</p>
+            <p>Logout</p>
+        </nav>
+    </div>
 
     <main>
         <h2>Vergessene Flasche:</h2>
