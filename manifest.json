@@ -1,7 +1,7 @@
 {
     "name": "Wasserwart",
     "short_name": "Wasserwart",
-    "start_url": "./index.html",
+    "start_url": "./players.html",
     "display": "standalone",
     "scope": "./",
     "icons": [
