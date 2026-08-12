@@ -149,8 +149,7 @@ function renderInvoices(invoices) {
                 </strong>
 
                 <span>
-                    ${invoice.vorname}
-                    <!--${invoice.name}-->
+                    ${invoice.spitzname ?? invoice.vorname}
                 </span>
 
             </div>
@@ -275,7 +274,7 @@ function renderInvoices(invoices) {
 
         invoicesContainer.innerHTML = `
             <p class="no-invoices">
-                Keine Einträge gefunden.
+                Keine Einträge gefunden
             </p>
         `;
     }

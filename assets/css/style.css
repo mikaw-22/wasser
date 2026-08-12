@@ -46,6 +46,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
+    color: #001aff;
 }
 
 input {

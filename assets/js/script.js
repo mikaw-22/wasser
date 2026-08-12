@@ -297,6 +297,8 @@ async function createInvoice(
 
             vorname: player.vorname,
 
+            spitzname: player.spitzname,
+
             number: player.nummer,
 
             paid: false,
