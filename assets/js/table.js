@@ -594,7 +594,6 @@ async function deleteInvoice(invoiceId) {
             .delete()
             .eq("id", invoiceId);
 
-
     if (error) {
 
         console.error(
@@ -606,15 +605,14 @@ async function deleteInvoice(invoiceId) {
 
     }
 
-
     console.log(
         "Invoice gelöscht:",
         invoiceId
     );
 
-
     await getInvoices();
 
+    showDeleteNotification();
 }
 
 
@@ -677,6 +675,27 @@ function showNophotoNotification() {
 
     const notification =
         document.getElementById("nophotoNotification");
+
+    if (!notification) {
+        return;
+    }
+
+    notification.classList.remove("show");
+
+    // Animation zurücksetzen
+    void notification.offsetWidth;
+
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+}
+
+function showDeleteNotification() {
+
+    const notification =
+        document.getElementById("deleteNotification");
 
     if (!notification) {
         return;

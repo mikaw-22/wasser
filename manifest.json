@@ -1,0 +1,14 @@
+{
+    "name": "Wasserwart",
+    "short_name": "Wasserwart",
+    "start_url": "./login.html",
+    "display": "standalone",
+    "scope": "./",
+    "icons": [
+        {
+            "src": "./assets/img/icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        }
+    ]
+}
