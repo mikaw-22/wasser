@@ -46,7 +46,6 @@ async function login() {
             .getElementById("zugang")
             .value;
 
-
     const { data, error } =
         await supabaseClient
             .from("passwords")
@@ -54,16 +53,14 @@ async function login() {
             .eq("password", password)
             .maybeSingle();
 
-
     if (error) {
 
         console.error(error);
 
-        alert("Fehler beim Login.");
+        showWrongPasswordNotification();
 
         return;
     }
-
 
     if (data) {
 
@@ -71,21 +68,31 @@ async function login() {
 
     } else {
 
-        document
-            .getElementById("falsePasswordPopup")
-            .classList.add("show");
+        showWrongPasswordNotification();
 
     }
 
 }
 
-document
-    .getElementById("closeFalsePasswordPopup")
-    .addEventListener("click", () => {
 
-        document
-            .getElementById("falsePasswordPopup")
-            .classList.remove("show");
+function showWrongPasswordNotification() {
 
-    });
+    const notification =
+        document.getElementById("wrongPasswordNotification");
 
+    if (!notification) {
+        return;
+    }
+
+    notification.classList.remove("show");
+
+    // Animation zurücksetzen
+    void notification.offsetWidth;
+
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+
+}
