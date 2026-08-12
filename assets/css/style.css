@@ -46,7 +46,7 @@ main {
     border-radius: 5px;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    color: #001aff;
+    color: #000000;
 }
 
 input {
@@ -638,7 +638,7 @@ select, label input {
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        gap: 15px;
+        gap: 12.5px;
     }
 
     #players button {

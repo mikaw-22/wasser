@@ -38,76 +38,24 @@
         </nav>
 
         <nav class="menuLinks" id="navLinks">
-            <p class="menuP"><a href="table.html">Tabelle</a></p>
-            <p class="menuP"><a href="cash.html">Säulen</a></p>
+            <p class="menuP"><a href="players.html">Home</a></p>
+            <p class="menuP" style="font-weight: bold;"><a href="cash.html">Säulen</a></p>
             <p class="menuP"><a href="index.html">Logout</a></p>
         </nav>
+
+        <main>
+            <h2 style="margin-left: 10px;">Flaschenkasse:</h2>
+        </main>
+
     </div>
 
     <main>
-        <h2 style="margin-left: 10px;">Eintrag erstellen:</h2>
-        <div id="players"></div>
+        
     </main>
 
-    <div class="player-popup" id="playerPopup">
-
-        <div class="player-popup-content">
-
-            <button class="popup-cancel" id="cancelPlayerPopup" title="Abbrechen">
-                <span class="material-symbols-outlined" style="color: rgba(255, 0, 0, 0.432);">
-                    delete
-                </span>
-            </button>
-
-
-            <h2 id="popupPlayerName">
-                Spieler eintragen
-            </h2>
-
-
-            <label class="popup-checkbox">
-                <input type="checkbox" id="matchdayCheckbox">
-                <span>Matchday ×2</span>
-            </label>
-
-
-            <div class="photo-upload">
-
-                <label for="playerPhoto" id="photoUploadLabel">
-                    <i class="fa-solid fa-camera"></i>
-                    Foto hinzufügen
-                </label>
-
-                <input type="file" id="playerPhoto" accept="image/*" capture="environment">
-
-                <p id="selectedPhotoName"></p>
-
-            </div>
-
-
-            <button class="popup-submit" id="submitPlayer">
-                Submit
-            </button>
-
-        </div>
-
-    </div>
-
-    <div class="success-notification" id="successNotification">
-        <div class="success-content">
-            <!--<div class="success-icon">
-                <i class="fa-solid fa-check"></i>
-            </div>-->
-
-            <div class="success-text">
-                Eintrag hinzugefügt.
-            </div>
-        </div>
-
-        <div class="success-progress"></div>
-    </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/cash.js"></script>
 </body>
 </html>
