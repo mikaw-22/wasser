@@ -225,9 +225,7 @@ function renderInvoices(invoices) {
                 // Kein Foto vorhanden
                 if (!invoice.photo) {
 
-                    document
-                        .getElementById("nophotoPopup")
-                        .classList.add("show");
+                    showNophotoNotification();
 
                     return;
                 }
@@ -294,14 +292,6 @@ document
         document
             .getElementById("invoicePhoto")
             .src = "";
-    });
-
-document
-    .getElementById("closeNophotoPopup")
-    .addEventListener("click", () => {
-        document
-            .getElementById("nophotoPopup")
-            .classList.remove("show");
     });
 
 // =========================
@@ -682,6 +672,27 @@ document
 
         }
     );
+
+function showNophotoNotification() {
+
+    const notification =
+        document.getElementById("nophotoNotification");
+
+    if (!notification) {
+        return;
+    }
+
+    notification.classList.remove("show");
+
+    // Animation zurücksetzen
+    void notification.offsetWidth;
+
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+}
 
 
 // =========================

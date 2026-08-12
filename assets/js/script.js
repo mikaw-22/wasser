@@ -372,6 +372,8 @@ if (submitPlayer) {
                 matchday
             );
 
+            showSuccessNotification();
+
         }
     );
 
@@ -420,6 +422,35 @@ function menuFunction(x) {
         .classList.toggle("show");
 
 }
+
+
+
+
+
+
+
+function showSuccessNotification() {
+
+    const notification =
+        document.getElementById("successNotification");
+
+    if (!notification) {
+        return;
+    }
+
+    notification.classList.remove("show");
+
+    // Animation zurücksetzen
+    void notification.offsetWidth;
+
+    notification.classList.add("show");
+
+    setTimeout(() => {
+        notification.classList.remove("show");
+    }, 3000);
+}
+
+
 
 // =========================
 // START
