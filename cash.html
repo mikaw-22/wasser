@@ -16,6 +16,7 @@
     <meta name="apple-mobile-web-app-title" content="Wasserwart">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Alles für Malle</title>
 </head>
 <body>
@@ -38,8 +39,8 @@
         </nav>
 
         <nav class="menuLinks" id="navLinks">
-            <p class="menuP"><a href="players.html">Home</a></p>
-            <p class="menuP" style="font-weight: bold;"><a href="cash.html">Säulen</a></p>
+            <p class="menuP" style="font-weight: bold;"><a href="players.html">Home</a></p>
+            <p class="menuP"><a href="table.html">Einträge</a></p>
             <p class="menuP"><a href="index.html">Logout</a></p>
         </nav>
 
@@ -49,8 +50,24 @@
 
     </div>
 
-    <main>
+    <main style="margin-left: 10px;">
+        <div id="cashBalance">
+            0,00 €
+        </div>
+
+        <div id="cashDetails">
+            <p>Normale Einträge: <span id="normalCount">0</span></p>
+            <p>Matchday: <span id="gamedayCount">0</span></p>
+        </div>
+
+
+        <div style="display: flex;">
+
         
+        <div id="saeulenBalance">
+            0,00 €
+        </div><span><i class="fa-solid fa-faucet-drip" style="font-size: 50px; margin: 55px 0 0 30px;"></i></span>
+        </div>
     </main>
 
     

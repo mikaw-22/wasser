@@ -576,6 +576,16 @@ select, label input {
     animation: notificationProgress 3s linear forwards;
 }
 
+#cashBalance, #saeulenBalance {
+    font-weight: bold;
+    font-size: 100px;
+    margin-bottom: 20px;
+}
+
+#saeulenBalance {
+    margin-top: 20px;
+}
+
 @keyframes notificationProgress {
     from {
         width: 100%;

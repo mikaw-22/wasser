@@ -38,3 +38,75 @@ function menuFunction(x) {
         .getElementById("navLinks")
         .classList.toggle("show");
 }
+
+async function getCash() {
+
+    const { data, error } =
+        await supabaseClient
+            .from("invoices")
+            .select("gameday");
+
+    if (error) {
+
+        console.error(
+            "Fehler beim Laden der Invoices:",
+            error
+        );
+
+        return;
+    }
+
+
+    let balance = 0;
+    let normalCount = 0;
+    let gamedayCount = 0;
+
+
+    data.forEach(invoice => {
+
+        if (invoice.gameday) {
+
+            balance += 4;
+            gamedayCount++;
+
+        } else {
+
+            balance += 2;
+            normalCount++;
+
+        }
+
+    });
+
+
+    let sauelen = balance / 125
+
+
+    document
+        .getElementById("cashBalance")
+        .textContent =
+        balance.toLocaleString("de-DE", {
+            style: "currency",
+            currency: "EUR"
+        });
+
+
+    document
+        .getElementById("normalCount")
+        .textContent =
+        normalCount;
+
+
+    document
+        .getElementById("gamedayCount")
+        .textContent =
+        gamedayCount;
+
+    document
+        .getElementById("saeulenBalance")
+        .textContent =
+        sauelen;
+}
+
+
+getCash();
